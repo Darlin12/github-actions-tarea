@@ -2,8 +2,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")
+
+driver = webdriver.Chrome(options=options)
+
+
 def test():
-    driver = webdriver.Chrome()
+    
     driver.get("http://practixsao21hds.surge.sh")
 
     time.sleep(5)
