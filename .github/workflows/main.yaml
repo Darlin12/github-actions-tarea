@@ -31,9 +31,9 @@ jobs:
           surge ./ practixsao21hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
           echo "Test environment deployed. Visit: https://practixsao21hds.surge.sh"
       
-      - name: Run Selenium Tests
+      - name: Run Python Tests
         run: |
-          python your_test_script.py  # Replace with your actual test script name
+          python hello.py  
           
       - name: Deploy to production environment
         run: |
