@@ -15,6 +15,5 @@ jobs:
 
             - run: npm install -g surge
             - run: echo "Deploying website"
-            - run: surge ./ practixoxthds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
-          
+            - run: surge ./ practixo21hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
             - run: echo "Please visit => practixoxthds.surge.sh
