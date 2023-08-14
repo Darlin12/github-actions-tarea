@@ -19,7 +19,6 @@ def test():
     print("Test passed!")
 
     # Pause script for 10 seconds before exiting
-    time.sleep(10)
 
 test()  # Call the test function
 
