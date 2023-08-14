@@ -33,7 +33,7 @@ jobs:
       
       - name: Run Selenium Tests
         run: |
-          python your_test_script.py  # Replace with your actual test script name
+          python hello.js
           
       - name: Deploy to production environment
         if: ${{ job.status == 'success' }}
