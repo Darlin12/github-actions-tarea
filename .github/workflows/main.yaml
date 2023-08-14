@@ -22,7 +22,7 @@ jobs:
           pip install selenium pytest
           
       - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v2
+        uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: "latest"
       
