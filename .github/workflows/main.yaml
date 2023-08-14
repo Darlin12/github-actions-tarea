@@ -33,7 +33,7 @@ jobs:
       
       - name: Run Selenium Tests
         run: |
-          python hello.js
+          python hello.py
           
       - name: Deploy to production environment
         if: ${{ job.status == 'success' }}
