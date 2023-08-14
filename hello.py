@@ -19,7 +19,7 @@ def test():
     message = message_element.text
 
     # Assert that the correct message is displayed
-    expected_message = "Hello, Node.js!"
+    expected_message = "Helo, Node.js!"
     assert message == expected_message, f"Expected '{expected_message}', but got '{message}'"
 
     print("Test passed!")
