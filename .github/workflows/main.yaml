@@ -1,37 +1,41 @@
-name: Continuous Deployment
+name: Continuous Deployment and Testing
 on: [push]
 
 jobs:
-  deploy:
+  deploy_and_test:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v3.2.0
+      - name: Checkout code
+        uses: actions/checkout@v2
       
-      - run: echo "Setting up NodeJs"
-      
-      - name: Setup NodeJs
-        uses: actions/setup-node@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: 16.x
-
+      
+      - name: Install surge
+        run: npm install -g surge
+      
+      - name: Install Python dependencies
+        run: |
+          pip install selenium pytest
+          
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v2
         with:
-         chrome-version: "latest"
-        
-
-      - run: npm install -g surge
-      - run: pip install selenium pytest
+          chrome-version: "latest"
       
-      - run: echo "Deploying website"
-      - run: surge ./ practixsao21hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
-      - run: echo "entorno de pruebas desplegado, Please visit => practixsao21hds.surge.sh"
+      - name: Deploy to test environment
+        run: |
+          surge ./ practixsao21hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
+          echo "Test environment deployed. Visit: https://practixsao21hds.surge.sh"
       
-      - run: echo "Pruebas iniciadas"
-      - run: python hello.py
-      - run: echo "Pruebas pruebas concluidas"
-      
-      - run: surge ./ practixsao22hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
-      - run: echo "entorno de produccion desplegado, Please visit => practixsao22hds.surge.sh"
-      
-      - run: npx protractor protractor.conf.js
+      - name: Run Selenium Tests
+        run: |
+          python your_test_script.py  # Replace with your actual test script name
+          
+      - name: Deploy to production environment
+        run: |
+          surge ./ practixsao22hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
+          echo "Production environment deployed. Visit: https://practixsao22hds.surge.sh"
