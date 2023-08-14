@@ -14,6 +14,7 @@ jobs:
                node-version: 16.x
 
             - run: npm install -g surge
+            - run: pip install selenium pytest
             - run: echo "Deploying website"
             - run: surge ./ practixsao21hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
             - run: echo "entorno de pruebas desplegado, Please visit => practixsao21hds.surge.sh"
