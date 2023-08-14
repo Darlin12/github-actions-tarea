@@ -18,7 +18,7 @@ jobs:
             - run: surge ./ practixsao21hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
             - run: echo "entorno de pruebas desplegado, Please visit => practixsao21hds.surge.sh"
             - run: echo "Pruebas iniciadas"
-            - run: python hello-node-app\test\hello.py
+            - run: python hello.py
             - run: echo "Pruebas pruebas concluidas"
             - run: surge ./ practixsao22hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
             - run: echo "entorno de produccion desplegado, Please visit => practixsao22hds.surge.sh"
