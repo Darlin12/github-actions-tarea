@@ -12,10 +12,10 @@ jobs:
   steps:
   - checkout: self
       
-  - task: UseNode@2
-    displayName: 'Set up Node.js'
+  - task: NodeTool@0
     inputs:
       versionSpec: '16.x'
+      displayName: 'Set up Node.js'
       
   - script: npm install -g surge
     displayName: 'Install surge'
