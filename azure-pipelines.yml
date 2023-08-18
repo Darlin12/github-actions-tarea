@@ -1,0 +1,52 @@
+trigger:
+- push
+
+pr: none
+
+jobs:
+- job: deploy_and_test
+  displayName: Continuous Deployment and Testing
+  pool:
+    vmImage: 'ubuntu-latest'
+    
+  steps:
+  - checkout: self
+      
+  - task: UseNode@2
+    displayName: 'Set up Node.js'
+    inputs:
+      versionSpec: '16.x'
+      
+  - script: npm install -g surge
+    displayName: 'Install surge'
+      
+  - script: |
+      pip install selenium pytest
+    displayName: 'Install Python dependencies'
+    
+  - script: |
+      echo "##vso[task.setvariable variable=CHROME_BIN]$(Agent.ToolsDirectory)/_tools/chromium/latest/chrome-win/chrome.exe"
+    displayName: 'Set CHROME_BIN variable'
+    
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+      
+  - script: |
+      surge ./ practixsao21hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
+      Write-Host "Test environment deployed. Visit: https://practixsao21hds.surge.sh"
+    displayName: 'Deploy to test environment'
+    
+  - script: |
+      python hello.py
+    displayName: 'Run Selenium Tests'
+    
+  - script: |
+      if ($env:JOB_STATUS -eq "Succeeded") {
+        surge ./ practixsao22hds.surge.sh --token 9e3245c4523779c03a01ac588e5a7f1a
+        Write-Host "Production environment deployed. Visit: https://practixsao22hds.surge.sh"
+      }
+    env:
+      JOB_STATUS: $(Agent.JobStatus)
+    displayName: 'Deploy to production environment'
